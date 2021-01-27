@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new post to our site</title>
+</head>
+<body>
+<form action="/post-add/" method="POST">
+    {% csrf_token %}
+    <label for="image">Изображение</label>
+    <input id="image" type="file" name="image">
+
+    <label for="title">Заголовок</label>
+    <input id="title" type="text" name="title">
+
+    <label for="description">Описание</label>
+    <input id="description" type="text" name="description">
+        <input type="submit" value="Создать пост">
+</form>
+</body>
+</html>

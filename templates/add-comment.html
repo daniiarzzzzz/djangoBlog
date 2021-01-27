@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add-comment</title>
+</head>
+<body>
+<form action="/comment-add" method="POST">
+    {% csrf_token %}
+    <input type="text">
+    <input type="submit">
+</form>
+</body>
+</html>
