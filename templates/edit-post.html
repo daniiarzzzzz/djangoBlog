@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit post: {{ post.title }}</title>
+</head>
+<body>
+<form action="/edit-post/{{ post.id }}/" method="POST">
+    {% csrf_token %}
+    <p>
+        <label for="image">Изображение</label>
+        <input id="image" type="file" name="image" value="{{ post.image }}">
+    </p>
+    <p>
+        <label for="title">Заголовок</label>
+        <input id="title" type="text" name="title" value="{{ post.title }}">
+    </p>
+    <p>
+        <label for="description">Описание</label>
+        <input id="description" type="text" name="description" value="{{ post.description }}">
+    </p>
+    <input type="submit" value="Изменить пост">
+
+</form>
+</body>
+</html>

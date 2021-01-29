@@ -9,8 +9,7 @@
     <ul>
         {% for post in posts %}
             <li>
-                <p>title: {{ post.title }}</p>
-                <p>description: {{ post.description }}</p>
+                <a href="/posts/{{ post.id }}/"><p>title: {{ post.title }}</p></a>
                 <p>image: {{ post.image }}</p>
                 <p>like: {{ post.like }}</p>
             </li>

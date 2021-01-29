@@ -24,6 +24,34 @@ def show_lenta(request):
         return render(request, 'lenta.html', context={'posts': Post.objects.all()})
 
 
+def detail_post(request, pk):
+    try:
+        post = Post.objects.get(id=pk)
+        return render(request, 'post-detail.html', context={'post': post})
+    except Post.DoesNotExist:
+        return HttpResponse('Does Not Exist!', status=404)
+
+
+def edit_post(request, pk):
+    try:
+        post = Post.objects.get(id=pk)
+    except Post.DoesNotExist:
+        return HttpResponse('Does Not Exist!', status=404)
+    if request.method == 'GET':
+        return render(request, 'edit-post.html', context={'post': post})
+    if request.method in 'POST':
+        data = request.POST
+        if 'image' in data:
+            post.image = data['image']
+        if 'description' in data:
+            post.description = data['description']
+        if 'title' in data:
+            post.title = data['title']
+
+        post.save()
+        return render(request, 'edit-post.html', context={'post': post})
+
+
 @csrf_exempt
 def add_like(request):
     return HttpResponse(
