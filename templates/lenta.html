@@ -7,7 +7,7 @@
 <body>
 <div>
     <ul>
-        {% for post in posts %}
+        {% for post in object_list %}
             <li>
                 <a href="/posts/{{ post.id }}/"><p>title: {{ post.title }}</p></a>
                 <p>image: {{ post.image }}</p>

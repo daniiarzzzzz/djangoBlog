@@ -1,8 +1,26 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 
+from lenta.forms import PostForm
 from lenta.models import Post
+
+
+class PostView(generic.ListView):
+    queryset = Post.objects.all()
+    template_name = 'lenta.html'
+
+
+class PostCreateView(generic.CreateView):
+    template_name = 'add-post.html'
+    form_class = PostForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            return render(request, self.template_name, context={'form': form})
+        return render(request, self.template_name, context={'form': form})
 
 
 def add_post(request):
@@ -18,10 +36,9 @@ def add_post(request):
         return HttpResponse('Method not allowed')
 
 
-@csrf_exempt
-def show_lenta(request):
-    if request.method == 'GET':
-        return render(request, 'lenta.html', context={'posts': Post.objects.all()})
+class PostDetailView(generic.DetailView):
+    template_name = 'post-detail.html'
+    model = Post
 
 
 def detail_post(request, pk):
